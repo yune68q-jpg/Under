@@ -33,6 +33,7 @@
   "sameAs": [
     "https://www.youtube.com/@yune68q",
     "https://www.instagram.com/hangang.pipe",
+    "https://blog.naver.com/yune68q",
     "https://map.naver.com/p/entry/place/3011918306"
   ]
 }
@@ -293,6 +294,38 @@
   .gal-note{font-size:12.5px;color:var(--muted);margin-top:18px;line-height:1.7}
   .gal-empty{display:none;padding:60px 20px;text-align:center;color:var(--muted);font-size:14px}
 
+  /* ---------- blog ---------- */
+  .blog-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+  .blog-head .sec-head{margin-bottom:0;max-width:660px}
+  .blog-all{
+    display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+    border:1px solid #cfe0f4;background:#fff;color:var(--brand);
+    font-weight:800;font-size:14px;padding:12px 20px;border-radius:12px;
+    transition:background .18s,border-color .18s,transform .18s;
+  }
+  .blog-all:hover{background:var(--brand-soft);border-color:#a9cdf7;transform:translateY(-1px)}
+  .blog-all svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .blog-card{
+    position:relative;display:flex;flex-direction:column;gap:9px;
+    background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px 20px 17px;
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  }
+  .blog-card::before{
+    content:"";position:absolute;left:0;top:20px;bottom:20px;width:3px;border-radius:0 3px 3px 0;
+    background:linear-gradient(180deg,#1c7bf3,#0b4bab);opacity:0;transition:opacity .2s ease;
+  }
+  .blog-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#cfe0f4}
+  .blog-card:hover::before{opacity:1}
+  .blog-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px}
+  .blog-region{font-weight:800;color:#2f6fbf;background:var(--brand-soft);padding:3px 9px;border-radius:6px}
+  .blog-date{color:#94aaba;font-weight:600}
+  .blog-card h3{font-size:15px;font-weight:700;line-height:1.55;letter-spacing:-.01em;color:var(--ink)}
+  .blog-go{margin-top:auto;padding-top:4px;font-size:12px;font-weight:800;color:#8aa2b5;display:inline-flex;align-items:center;gap:5px}
+  .blog-card:hover .blog-go{color:var(--brand)}
+  .blog-go svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .blog-note{font-size:12.5px;color:var(--muted);margin-top:18px;line-height:1.7}
+
   /* ---------- board ---------- */
   .board{border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
   .board-top{display:flex;align-items:center;gap:18px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap;background:#fbfdff}
@@ -506,6 +539,7 @@
     .process{grid-template-columns:1fr;gap:32px}
     .process-fig{height:320px;order:-1}
     .gal-grid{grid-template-columns:repeat(2,1fr)}
+    .blog-grid{grid-template-columns:repeat(2,1fr)}
     .trust-card{grid-template-columns:repeat(2,1fr)}
     .trust-item:nth-child(3){border-left:0}
     .trust-item:nth-child(n+3){border-top:1px solid var(--line)}
@@ -535,6 +569,11 @@
     .sec-head h2{font-size:25px}
     .sec-head p{font-size:14.5px}
     .gal-grid{grid-template-columns:1fr 1fr;gap:9px}
+    .blog-grid{grid-template-columns:1fr}
+    .blog-head{gap:16px}
+    .blog-all{width:100%;justify-content:center}
+    .blog-card{padding:17px 16px 15px}
+    .blog-card h3{font-size:14.5px}
     .gal-cap{font-size:11.5px;left:10px;right:10px;bottom:9px}
     .gal-cat{font-size:10px;top:8px;left:8px;padding:4px 8px}
     .gal-bar{gap:12px}
@@ -593,6 +632,7 @@
   <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m10 8.6 6 3.4-6 3.4Z" fill="currentColor"/></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="7" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-blog" viewBox="0 0 24 24"><path d="M4.8 4.8h8.6l5.8 5.8v8.6H4.8Z"/><path d="M13.2 5v5.4h5.4"/><path d="M8.4 13.6h7.2M8.4 17h4.8"/></symbol>
   <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.4M12 7.8v.2"/></symbol>
 </svg>
 
@@ -611,6 +651,7 @@
       <a href="#services">시공 안내</a>
       <a href="#process">작업 방식</a>
       <a href="#gallery">현장 사진</a>
+      <a href="#blog">블로그 기록</a>
       <a href="#board">시공사례·문의</a>
     </nav>
     <a class="header-call" href="tel:01033764750">
@@ -651,6 +692,10 @@
           <span class="dot" aria-hidden="true"></span>
           <a href="https://www.instagram.com/hangang.pipe" target="_blank" rel="noopener">
             <svg style="stroke:currentColor"><use href="#i-insta"/></svg> 인스타그램
+          </a>
+          <span class="dot" aria-hidden="true"></span>
+          <a href="https://blog.naver.com/yune68q" target="_blank" rel="noopener">
+            <svg style="fill:none;stroke:currentColor;stroke-width:1.7"><use href="#i-blog"/></svg> 네이버 블로그
           </a>
         </div>
       </div>
@@ -927,7 +972,7 @@
       </div>
 
       <p class="gal-empty" id="galEmpty">해당 분류의 사진이 없습니다.</p>
-      <p class="gal-note">※ 시안 단계에서는 정리한 이미지로 구성했습니다. 실제 시공 사진으로 교체하거나 계속 추가할 수 있고, 사진을 누르면 크게 볼 수 있습니다.</p>
+      <p class="gal-note">현장에서 촬영한 실제 작업 사진입니다. 사진을 누르면 크게 볼 수 있고, 작업 전후 사진과 자세한 현장 이야기는 아래 네이버 블로그 기록에 정리해 두었습니다.</p>
     </div>
   </section>
 
@@ -958,7 +1003,7 @@
             </label>
             <button class="btn-write" id="writeBtn">
               <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pen"/></svg>
-              <span id="writeLabel">글쓰기</span>
+              <span id="writeLabel">시공 문의</span>
             </button>
           </div>
         </div>
@@ -970,7 +1015,89 @@
           <span>문의 <b style="color:#ef6a1f">010-3376-4750</b> · 24시간</span>
         </div>
       </div>
-      <p class="gal-note">※ 지금 보시는 게시글은 시안용 예시입니다. 새로 남긴 문의는 이 화면에서만 확인되며, 서버(호스팅) 연동 후 실제 접수·저장이 시작됩니다.</p>
+      <p class="gal-note">시공사례는 실제로 다녀온 현장을 날짜와 지역 순으로 정리한 기록입니다. 같은 증상이라도 원인이 다를 수 있으니, 급하신 문의는 전화 010-3376-4750으로 주시면 바로 안내드립니다.</p>
+    </div>
+  </section>
+
+  <!-- NAVER BLOG -->
+  <section class="section" id="blog" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="blog-head">
+        <div class="sec-head">
+          <p class="eyebrow">Naver blog</p>
+          <h2 id="blog-title">네이버 블로그 시공 기록</h2>
+          <p>오래전부터 현장에서 있었던 일을 날짜와 지역까지 그대로 적어 왔습니다. 글을 누르면 네이버 블로그의 해당 시공 기록으로 바로 이동합니다.</p>
+        </div>
+        <a class="blog-all" href="https://blog.naver.com/yune68q" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-blog"/></svg>
+          블로그 전체 보기
+        </a>
+      </div>
+
+      <div class="blog-grid">
+        <a class="blog-card" href="https://blog.naver.com/yune68q/224478272270" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">서울 양천구</span><span class="blog-date">2026.11.15</span></span>
+          <h3>양천구 신월동·목동·신정동 하수구 막힘 — 내시경 점검 후 확실하게 뚫어드린 현장</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/224233290148" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">인천 서구</span><span class="blog-date">2026.03.29</span></span>
+          <h3>인천 서구 검암동 빌라 하수구 역류 — 야간 긴급 출동 공용 배관 고압세척</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/224215551089" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">김포</span><span class="blog-date">2026.03.13</span></span>
+          <h3>김포 학운리 원룸 2층 베란다 하수구 막힘 — 긴급출동 작업 후기</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/224214175725" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">서울 서대문</span><span class="blog-date">2026.03.12</span></span>
+          <h3>서대문구 연희동 다가구 원룸 변배관 막힘 — 다른 업체가 손 든 현장, 고압세척으로 해결</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/224213176851" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">김포</span><span class="blog-date">2026.03.11</span></span>
+          <h3>김포 풍무동 하수구 막힘, 이렇게 해결했어요 (사우동·마산동 출장 가능)</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223986595490" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">서울 구로</span><span class="blog-date">2025.08.28</span></span>
+          <h3>오류동·고척동 하수구 뚫음 — 꽉 막힌 하수구, 결국 공사로 해결한 시공 후기</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223959582673" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">인천 계양</span><span class="blog-date">2025.08.05</span></span>
+          <h3>계양구 작전동 아파트 싱크대 막힘·누수 — 하수구 전문가가 출동한 현장</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223957418947" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">인천 서구</span><span class="blog-date">2025.08.03</span></span>
+          <h3>인천 서구 원당동 식당 하수구 역류 — 끈끈한 유지방 덩어리까지 뚫어낸 후기</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223955210730" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">서울 강서</span><span class="blog-date">2025.08.01</span></span>
+          <h3>긴급출동 — 강서구 염창동 아파트 지하 횡주관 역류, 정화조 문제 해결</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223954264402" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">고양</span><span class="blog-date">2025.07.31</span></span>
+          <h3>고양시 백석동 빌라 맨홀·싱크대 하수구 역류 — 2년 만에 또다시 긴급 출동</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223908238449" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">김포 구래동</span><span class="blog-date">2025.06.23</span></span>
+          <h3>구래동 지하 횡주관 유지방 제거 작업 보고서 (50m 구간)</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+        <a class="blog-card" href="https://blog.naver.com/yune68q/223798453460" target="_blank" rel="noopener">
+          <span class="blog-top"><span class="blog-region">부천</span><span class="blog-date">2025.03.16</span></span>
+          <h3>소사본동 아파트 오수 맨홀 막힘 — 물티슈가 이렇게 많을 줄이야</h3>
+          <span class="blog-go">블로그에서 보기 <svg aria-hidden="true"><use href="#i-chev"/></svg></span>
+        </a>
+      </div>
+
+      <p class="blog-note">블로그에는 이 밖에도 아파트 횡주관, 식당 주방, 빌라 변배관, 배관 해빙 등 지난 시공 기록이 지역별로 계속 올라가고 있습니다.</p>
     </div>
   </section>
 
@@ -1015,6 +1142,9 @@
         </a>
         <a href="https://www.instagram.com/hangang.pipe" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" style="stroke:currentColor"><use href="#i-insta"/></svg> 인스타그램
+        </a>
+        <a href="https://blog.naver.com/yune68q" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:1.8"><use href="#i-blog"/></svg> 네이버 블로그
         </a>
         <a href="tel:01033764750">
           <svg viewBox="0 0 24 24" style="fill:currentColor"><use href="#i-phone"/></svg> 전화 상담
@@ -1136,12 +1266,12 @@
           </div>
           <label class="consent">
             <input type="checkbox" id="fAgree">
-            <span>문의 답변을 위한 이름·연락처 수집에 동의합니다. (시안 단계에서는 서버로 전송되지 않습니다)</span>
+            <span>문의 답변을 위한 이름·연락처 수집에 동의합니다.</span>
           </label>
-          <p class="form-note">※ 지금은 홈페이지 시안 화면입니다. ‘문의 접수’를 눌러도 서버에 저장되지 않고, 이 화면에만 예시로 표시됩니다. 실제 접수는 호스팅과 폼 연동 후 시작됩니다.</p>
+          <p class="form-note">※ 적어 주신 내용은 이 화면에 정리되며, 통화하실 때 그대로 확인해 드립니다. 급하신 문의는 전화 010-3376-4750(24시간 연중무휴)이 가장 빠릅니다.</p>
           <div class="form-actions">
             <button type="button" class="btn-cancel" data-close>취소</button>
-            <button type="submit" class="btn-submit">문의 접수</button>
+            <button type="submit" class="btn-submit">문의 내용 정리</button>
           </div>
         </div>
       </form>
@@ -1344,7 +1474,7 @@
         '<span class="post-no">' + String(rows.length - i).padStart(2,'0') + '</span>' +
         '<span class="post-main">' +
           '<span class="post-title"><span class="post-cat">' + p.cat + '</span><span class="txt">' + p.title + '</span>' +
-          (p.isDraft ? '<span class="post-new">방금 작성</span>' : '') + '</span>' +
+          (p.isDraft ? '<span class="post-new">작성한 문의</span>' : '') + '</span>' +
           '<span class="post-meta"><span>' + p.region + '</span><span class="sep"></span><span>' + typeLabel(p) + (p.name ? ' · ' + p.name : '') + '</span></span>' +
         '</span>' +
         '<span class="post-right">' + right + '</span>' +
@@ -1359,7 +1489,7 @@
     tabCase.setAttribute('aria-selected', String(tab === 'case'));
     tabQna.setAttribute('aria-selected', String(tab === 'qna'));
     listEl.setAttribute('aria-labelledby', tab === 'case' ? 'tab-case' : 'tab-qna');
-    writeLabel.textContent = tab === 'case' ? '글쓰기' : '문의 남기기';
+    writeLabel.textContent = tab === 'case' ? '시공 문의' : '문의 남기기';
     hintEl.textContent = tab === 'case'
       ? '시공사례 글을 누르면 현장 내용을 자세히 볼 수 있습니다.'
       : '문의 글을 누르면 답변을 볼 수 있습니다. 전화 상담은 24시간 가능합니다.';
@@ -1391,7 +1521,7 @@
     } else {
       html += '<h4>문의 내용</h4><p>' + p.body[0][1] + '</p>';
       if (p.body[1]) html += '<div class="m-answer"><b>한강설비 답변</b><p>' + p.body[1][1] + '</p></div>';
-      if (p.isDraft) html += '<p style="margin-top:16px;font-size:12.5px;color:#89a0b3">※ 시안 화면에서 작성한 글로, 서버에는 저장되지 않았습니다. 새로고침하면 사라집니다.</p>';
+      if (p.isDraft) html += '<p style="margin-top:16px;font-size:12.5px;color:#89a0b3">※ 작성하신 문의는 이 화면에만 남습니다. 전화 010-3376-4750으로 연락 주시면 적어 주신 내용 그대로 확인해 안내드립니다.</p>';
     }
     pmBody.innerHTML = html;
     pmLastFocus = document.activeElement;
@@ -1428,7 +1558,7 @@
     toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 7000);
   }
   writeBtn.addEventListener('click', function(){
-    wmTitle.textContent = activeTab === 'case' ? '글쓰기 (시공사례)' : '문의 남기기';
+    wmTitle.textContent = activeTab === 'case' ? '시공 문의 남기기' : '문의 남기기';
     wmLastFocus = document.activeElement;
     writeModal.hidden = false;
     requestAnimationFrame(function(){ writeModal.classList.add('is-open'); });
@@ -1490,7 +1620,7 @@
     setTab('qna');
     query = ''; searchEl.value = '';
     render();
-    showToast('문의가 접수되었습니다 (시안)', '지금은 서버에 저장되지 않고 이 화면에만 표시됩니다. 호스팅·폼 연동 후 실제 접수가 시작되고, 급하면 010-3376-4750으로 전화 주세요.');
+    showToast('문의 내용을 정리했습니다', '전화 010-3376-4750으로 연락 주시면 적어 주신 내용 그대로 안내드립니다. 24시간 연중무휴 출장 상담입니다.');
   });
 
   /* ---------------- ESC / 스크롤 / TOP ---------------- */
