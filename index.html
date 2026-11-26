@@ -259,6 +259,17 @@
   .price-note svg{width:20px;height:20px;flex:none;stroke:var(--brand);fill:none;stroke-width:1.9;margin-top:2px}
   .price-note b{font-size:14.5px}
   .price-note p{font-size:13.8px;color:var(--body);margin-top:3px;line-height:1.7}
+  .price-note .price-highlight{
+    color:#0f172a;
+    font-weight:800;
+    -webkit-text-fill-color:#0f172a;
+    text-decoration-line:underline;
+    text-decoration-style:solid;
+    text-decoration-color:#ea580c;
+    text-decoration-thickness:.17em;
+    text-underline-offset:.24em;
+    text-decoration-skip-ink:none;
+  }
 
   /* ---------- process ---------- */
   .process{display:grid;grid-template-columns:.92fr 1.08fr;gap:52px;align-items:center}
@@ -826,7 +837,7 @@
         <svg aria-hidden="true"><use href="#i-info"/></svg>
         <div>
           <b>비용은 현장을 보고 안내합니다</b>
-          <p>막힌 위치와 정도, 배관 상태, 필요한 장비가 매번 다르기 때문에 미리 단가를 정해 두지 않습니다. 현장 점검 후 비용을 안내드리고, 작업 전에 먼저 말씀드립니다. 경제적 비용과 합리적 견적으로 진행합니다.</p>
+          <p>막힌 위치와 정도, 배관 상태, 필요한 장비가 매번 다르기 때문에 미리 단가를 정해 두지 않습니다. 현장 점검 후 비용을 안내드리고, 작업 전에 먼저 말씀드립니다. <strong class="price-highlight">경제적 비용과 합리적 견적으로 진행합니다.</strong></p>
         </div>
       </div>
     </div>
