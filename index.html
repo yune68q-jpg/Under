@@ -1767,7 +1767,8 @@ wcs_do();
   if(!box) return;
   var NS = 'hangangpipe-kr-yune68q';
   var API = 'https://abacus.jasoncameron.dev';
-  var SESS_KEY = 'hg_visit_day';
+  var LS_KEY = 'hg_visit_last';
+  var HOUR_MS = 3600 * 1000;
   var els = {
     today: box.querySelector('[data-visit="today"]'),
     total: box.querySelector('[data-visit="total"]')
@@ -1775,10 +1776,20 @@ wcs_do();
   if(!els.today || !els.total) return;
 
   /* 한국 시간(KST) 기준 날짜 키 */
-  var todayKey = 'today-' + new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  var now = Date.now();
+  var todayStr = new Date(now + 9 * 3600 * 1000).toISOString().slice(0, 10);
+  var todayKey = 'today-' + todayStr;
 
-  var counted = false;
-  try { counted = sessionStorage.getItem(SESS_KEY) === todayKey; } catch(e){}
+  /* 같은 브라우저에서 마지막 카운팅 시각으로부터 1시간 이내면 중복 카운트 제외 */
+  var lastVisit = null;
+  try { lastVisit = JSON.parse(localStorage.getItem(LS_KEY) || 'null'); } catch(e){ lastVisit = null; }
+  var counted = !!(lastVisit && lastVisit.day === todayStr &&
+                   typeof lastVisit.ts === 'number' && Math.abs(now - lastVisit.ts) < HOUR_MS);
+
+  /* 실제로 카운트(hit)했을 때만 시각 기록. localStorage 차단 시 조용히 넘어감 */
+  function stampVisit(){
+    try { localStorage.setItem(LS_KEY, JSON.stringify({ day: todayStr, ts: Date.now() })); } catch(e){}
+  }
 
   function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
 
@@ -1803,12 +1814,18 @@ wcs_do();
     els[kind].textContent = fmt(value);
   }
 
-  /* 세션·날짜 기준 첫 방문만 카운트(hit), 새로고침은 조회(get) */
-  var pToday = api((counted ? 'get' : 'hit') + '/' + NS + '/' + todayKey).then(function(r){
-    if(r.ok) return r;
-    if(r.missing && counted) return api('hit/' + NS + '/' + todayKey);
-    return r;
-  });
+  /* 1시간 이내 재방문은 조회(get)만, 그 밖에는 카운트(hit) */
+  var didHit = false;
+  var pToday;
+  if(counted){
+    pToday = api('get/' + NS + '/' + todayKey).then(function(r){
+      if(r.ok) return r;
+      if(r.missing) return api('hit/' + NS + '/' + todayKey).then(function(r2){ if(r2.ok) didHit = true; return r2; });
+      return r;
+    });
+  } else {
+    pToday = api('hit/' + NS + '/' + todayKey).then(function(r){ if(r.ok) didHit = true; return r; });
+  }
   var pTotal = api((counted ? 'get' : 'hit') + '/' + NS + '/total');
 
   Promise.all([pToday, pTotal]).then(function(res){
@@ -1818,8 +1835,8 @@ wcs_do();
     if(total.ok) show('total', total.value);
     if(today.ok || total.ok){
       box.classList.add('is-ready');
-      if(!counted){ try { sessionStorage.setItem(SESS_KEY, todayKey); } catch(e){} }
     }
+    if(didHit) stampVisit();
     /* 둘 다 실패하면 숨김 상태 유지(깨져 보이지 않게) */
   });
 })();
