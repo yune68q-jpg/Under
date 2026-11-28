@@ -38,6 +38,31 @@
   ]
 }
 </script>
+<!-- Google 애널리틱스 4 (GA4) 방문자 통계 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DZ263BPKDC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DZ263BPKDC');
+</script>
+<!-- 전화 걸기 버튼(tel:) 클릭 추적 -->
+<script>
+  document.addEventListener('click', function (e) {
+    var el = e.target;
+    while (el && el.nodeType === 1) {
+      if (el.tagName === 'A' && (el.getAttribute('href') || '').indexOf('tel:') === 0) {
+        gtag('event', 'phone_click', {
+          event_category: 'contact',
+          event_label: '010-3376-4750',
+          phone_number: el.getAttribute('href').replace('tel:', '')
+        });
+        return;
+      }
+      el = el.parentElement;
+    }
+  }, true);
+</script>
 <style>
   :root{
     --navy:#0b1c2c;
