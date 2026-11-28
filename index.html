@@ -479,6 +479,12 @@
   .biz-info .row{display:flex;flex-wrap:wrap;gap:8px 20px}
   .biz-info b{color:#c8dae8;font-weight:600;margin-right:6px}
   .foot-bottom{margin-top:24px;padding-top:18px;padding-right:56px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12px;color:#6d8598}
+  .foot-visit{margin-top:16px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12px;color:#6d8598;visibility:hidden;font-variant-numeric:tabular-nums}
+  .foot-visit.is-ready{visibility:visible}
+  .foot-visit .v-item{display:inline-flex;align-items:center;gap:5px}
+  .foot-visit .v-k{color:#6d8598}
+  .foot-visit b{color:#a9c4da;font-weight:700;letter-spacing:.01em}
+  .foot-visit .v-sep{color:#33495c}
 
   /* ---------- mobile call bar ---------- */
   .mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(255,255,255,.97);
@@ -1255,6 +1261,12 @@
       </div>
     </div>
 
+    <div class="foot-visit" id="visitCounter" aria-label="방문자 수">
+      <span class="v-item"><span class="v-k">오늘 방문</span><b data-visit="today">-</b></span>
+      <span class="v-sep" aria-hidden="true">·</span>
+      <span class="v-item"><span class="v-k">전체 방문</span><b data-visit="total">-</b></span>
+    </div>
+
     <div class="foot-bottom">
       <span>© 2026 한강설비. All rights reserved.</span>
       <span>하수구 청소 · 고압세척 · 배관 내시경 · 오수관 · 횡주관</span>
@@ -1746,6 +1758,71 @@ wcs_add["wa"] = "306313c441fe02";
 if(window.wcs) {
 wcs_do();
 }
+</script>
+
+<!-- 방문자 카운터 (무료 abacus API) : 오늘/전체 방문 수 -->
+<script>
+(function(){
+  var box = document.getElementById('visitCounter');
+  if(!box) return;
+  var NS = 'hangangpipe-kr-yune68q';
+  var API = 'https://abacus.jasoncameron.dev';
+  var SESS_KEY = 'hg_visit_day';
+  var els = {
+    today: box.querySelector('[data-visit="today"]'),
+    total: box.querySelector('[data-visit="total"]')
+  };
+  if(!els.today || !els.total) return;
+
+  /* 한국 시간(KST) 기준 날짜 키 */
+  var todayKey = 'today-' + new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+
+  var counted = false;
+  try { counted = sessionStorage.getItem(SESS_KEY) === todayKey; } catch(e){}
+
+  function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  /* path -> {ok:true,value} | {ok:false,missing:true|false} */
+  function api(path){
+    var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, 6000);
+    var opt = { cache: 'no-store' };
+    if(ctrl) opt.signal = ctrl.signal;
+    return fetch(API + '/' + path, opt).then(function(r){
+      clearTimeout(timer);
+      if(r.status === 404) return { ok:false, missing:true };
+      if(!r.ok) return { ok:false, missing:false };
+      return r.json().then(function(d){
+        if(!d || typeof d.value !== 'number') return { ok:false, missing:false };
+        return { ok:true, value:d.value };
+      });
+    }).catch(function(){ clearTimeout(timer); return { ok:false, missing:false }; });
+  }
+
+  function show(kind, value){
+    els[kind].textContent = fmt(value);
+  }
+
+  /* 세션·날짜 기준 첫 방문만 카운트(hit), 새로고침은 조회(get) */
+  var pToday = api((counted ? 'get' : 'hit') + '/' + NS + '/' + todayKey).then(function(r){
+    if(r.ok) return r;
+    if(r.missing && counted) return api('hit/' + NS + '/' + todayKey);
+    return r;
+  });
+  var pTotal = api((counted ? 'get' : 'hit') + '/' + NS + '/total');
+
+  Promise.all([pToday, pTotal]).then(function(res){
+    var today = res[0], total = res[1];
+    if(today.missing) today = { ok:true, value:0 };
+    if(today.ok) show('today', today.value);
+    if(total.ok) show('total', total.value);
+    if(today.ok || total.ok){
+      box.classList.add('is-ready');
+      if(!counted){ try { sessionStorage.setItem(SESS_KEY, todayKey); } catch(e){} }
+    }
+    /* 둘 다 실패하면 숨김 상태 유지(깨져 보이지 않게) */
+  });
+})();
 </script>
 </body>
 </html>
